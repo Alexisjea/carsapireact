@@ -7,6 +7,15 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import CardMedia from '@mui/material/CardMedia';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
 const Brand = () => {
 
@@ -27,37 +36,50 @@ const Brand = () => {
         });
     }, []);
 
+    
+
     return(
-        <>
-       {carByBrand?.map((i, index) =>
-        <Card sx={{ minWidth: 275 }}>
-            <CardContent>
-                <CardMedia
-                        sx={{ height: 140 , width:150 }}
-                        image={`/${brand.image}`}
-                        title="green iguana"
-                    />
-                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                Marque Id : {brand.id}
-                </Typography>
-                <Typography variant="h5" component="div" >
-                Marque :  {brand.name}
-                </Typography>
-                <Typography sx={{ mb: 1.5 }} color="text.secondary" >
-                Image :  {brand.image} 
-                </Typography>
-                <Typography sx={{ mb: 1.5 }} color="text.secondary" key={index} >
-                    
-                        {i.model}
-                   
-                Voiture Modèle : 
-                </Typography>
-            </CardContent>
-            <CardActions>
-                <Button onClick={() => goHome()} > Go Home</Button>
-            </CardActions>
-            </Card> 
-        )} </>
+        <><ImageList sx={{ width: 500, height: 200 }} cols={3} rowHeight={164}>
+    <ImageListItem >
+      <img
+        src={`/${brand.image}`}
+        alt={brand.model}
+        loading="lazy"
+      />
+    </ImageListItem></ImageList>
+      
+       <>
+       <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Modèle</TableCell>
+            <TableCell align="right"></TableCell>
+            <TableCell align="right"></TableCell>
+            <TableCell align="right"></TableCell>
+            <TableCell align="right"></TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {carByBrand.map((row) => (
+            <TableRow
+              key={row.name}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell component="th" scope="row">
+                {row.model}
+              </TableCell>
+              <TableCell align="right"></TableCell>
+              <TableCell align="right"></TableCell>
+              <TableCell align="right"></TableCell>
+              <TableCell align="right"></TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+           <Button onClick={() => goHome()}> Go Home</Button></> 
+         </>
     );
 }
 export default Brand;
