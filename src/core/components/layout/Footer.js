@@ -9,13 +9,14 @@ const Footer = () => {
         position: "fixed",
         bottom: 0,
         width: "100%",
+        height: "8%",
       }}
     >
       <Toolbar>
         <Typography
           sx={{
-            marginLeft: "auto", 
-            marginRight: "auto", 
+            marginLeft: "auto",
+            marginRight: "auto",
             textAlign: "center",
           }}
           variant="body1"
