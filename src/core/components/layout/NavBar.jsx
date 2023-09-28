@@ -55,7 +55,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const NavBar = () => {
     return(
         <>
-        <h1>La nav bar</h1>
+        
         <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
@@ -78,7 +78,7 @@ const NavBar = () => {
             MUI
           </Typography>
             <Button color="inherit" component={Link} to="/">Accueil</Button>
-            <Button color="inherit" component={Link} to="/countries">Liste payss</Button>
+            <Button color="inherit" component={Link} to="/cars">Liste Voitures</Button>
             {/* {user ?
             <>
              <p>Bonjour {user?.firstname} {user?.lastname}</p>
