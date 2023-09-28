@@ -55,6 +55,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const NavBar = () => {
+
   const [user, setUser] = useContext(UserContext);
 
   const handleLogout = () => {
@@ -100,6 +101,7 @@ const NavBar = () => {
                 </Button>
               </>
             ) : (
+
               <>
                 <Button color="inherit" component={Link} to="auth/login">
                   Login

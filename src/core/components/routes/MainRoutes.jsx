@@ -1,3 +1,5 @@
+
+
 import { Routes, Route } from "react-router-dom";
 import CarsList from "../../../pages/CarsList";
 import Home from "../../../pages/home/Home";
@@ -19,3 +21,4 @@ const MainRoutes = () => {
   );
 };
 export default MainRoutes;
+>>>>>>> master

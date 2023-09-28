@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Grid } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import CardMedia from '@mui/material/CardMedia';
 
 const BrandsList = () => {
 
@@ -33,15 +34,18 @@ const BrandsList = () => {
             {brands?.map((brand, index) =>  
             <Card sx={{ minWidth: 275 }}>
             <CardContent>
+                 <CardMedia
+                        sx={{ height: 140 , width:150 }}
+                        image={brand.image}
+                        title="green iguana"
+                    />
                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                Voiture : {brand.id}
+                Marque Id : {brand.id}
                 </Typography>
                 <Typography variant="h5" component="div" key={index}>
-                Modèle :  {brand.name}
+                Marque :  {brand.name}
                 </Typography>
-                <Typography sx={{ mb: 1.5 }} color="text.secondary" >
-                Prix :  {brand.image} Marque Id :  {brand.brandID}
-                </Typography>
+                
             </CardContent>
             <CardActions>
                 <Button onClick={() => viewBrand(brand.id)} > Voir plus</Button>
