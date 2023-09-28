@@ -19,6 +19,7 @@ const BrandsList = () => {
         axios.get('https://formation.inow.fr/demo/api/v1/brands').then(response => {
             setBrands(response.data);
         })
+        
     }, [])
     const viewBrand = (id) => {
       navigate(`/brand/${id}`);

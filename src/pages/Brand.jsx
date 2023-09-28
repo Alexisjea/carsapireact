@@ -10,7 +10,8 @@ import CardMedia from '@mui/material/CardMedia';
 
 const Brand = () => {
 
-    const [brand, setBrand] = useState("");
+    const [brand, setBrand] = useState({});
+    const [carByBrand , setCarByBrand] = useState([]);
     const {id} = useParams();
     const navigate = useNavigate();
     const goHome = () => {
@@ -20,10 +21,15 @@ const Brand = () => {
         axios.get(`https://formation.inow.fr/demo/api/v1/brands/${id}`).then(response => {
             setBrand(response.data);
         });
+        axios.get(`https://formation.inow.fr/demo/api/v1/cars`).then(response => {
+            setCarByBrand(response.data.filter(x => x.brandID == id));
+            console.log(carByBrand);
+        });
     }, []);
 
     return(
         <>
+       {carByBrand?.map((i, index) =>
         <Card sx={{ minWidth: 275 }}>
             <CardContent>
                 <CardMedia
@@ -40,12 +46,18 @@ const Brand = () => {
                 <Typography sx={{ mb: 1.5 }} color="text.secondary" >
                 Image :  {brand.image} 
                 </Typography>
+                <Typography sx={{ mb: 1.5 }} color="text.secondary" key={index} >
+                    
+                        {i.model}
+                   
+                Voiture Modèle : 
+                </Typography>
             </CardContent>
             <CardActions>
                 <Button onClick={() => goHome()} > Go Home</Button>
             </CardActions>
             </Card> 
-        </>
+        )} </>
     );
 }
 export default Brand;
