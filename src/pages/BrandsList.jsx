@@ -19,7 +19,6 @@ const BrandsList = () => {
         axios.get('https://formation.inow.fr/demo/api/v1/brands').then(response => {
             setBrands(response.data);
         })
-        
     }, [])
     const viewBrand = (id) => {
       navigate(`/brand/${id}`);
@@ -41,10 +40,10 @@ const BrandsList = () => {
                         title="green iguana"
                     />
                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                Marque Id : {brand.id}
+                
                 </Typography>
-                <Typography variant="h5" component="div" key={index}>
-                Marque :  {brand.name}
+                <Typography variant="h5" component="div" key={index} >
+                 {brand.name}
                 </Typography>
                 
             </CardContent>

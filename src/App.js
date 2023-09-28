@@ -13,9 +13,11 @@ function App() {
     <div>
       <UserContext.Provider value={[user, setUser]}>
         <BrowserRouter>
+        <div className="doo" >
           <NavBar />
           <MainRoutes />
           <Footer />
+        </div>
         </BrowserRouter>
       </UserContext.Provider>
     </div>
