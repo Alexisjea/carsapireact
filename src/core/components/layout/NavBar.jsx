@@ -79,6 +79,7 @@ const NavBar = () => {
           </Typography>
             <Button color="inherit" component={Link} to="/">Accueil</Button>
             <Button color="inherit" component={Link} to="/cars">Liste Voitures</Button>
+            <Button color="inherit" component={Link} to="/brands">Liste Marques</Button>
             {/* {user ?
             <>
              <p>Bonjour {user?.firstname} {user?.lastname}</p>
