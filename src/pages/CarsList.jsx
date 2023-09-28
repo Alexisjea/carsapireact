@@ -1,8 +1,10 @@
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import { useState , useEffect  } from 'react';
 import { Grid } from '@mui/material';
@@ -34,28 +36,37 @@ const CarsList = () => {
     <>
       <h1>La liste des voitures</h1>
       <Grid direction="row" justifyContent="center" alignItems="center">
-        {cars?.map((car, index) => (
-          <Card sx={{height: "80%"}}>
-            <CardContent>
-              <Typography
-                sx={{ fontSize: 14 }}
-                color="text.secondary"
-                gutterBottom
-              >
-                Voiture : {car.id}
-              </Typography>
-              <Typography variant="h5" component="div" key={index}>
-                Modèle : {car.model}
-              </Typography>
-              <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                Prix : {car.price} Marque Id : {car.brandID}
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button onClick={() => viewCar(car.id)}> Voir plus</Button>
-            </CardActions>
-          </Card>
-        ))}
+       
+          <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Modèle</TableCell>
+            <TableCell align="right">Calories</TableCell>
+            <TableCell align="right">Fat&nbsp;(g)</TableCell>
+            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
+            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {cars.map((row) => (
+            <TableRow
+              key={row.name}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell component="th" scope="row">
+                {row.model}
+              </TableCell>
+              <TableCell align="right">{row.calories}</TableCell>
+              <TableCell align="right">{row.fat}</TableCell>
+              <TableCell align="right">{row.carbs}</TableCell>
+              <TableCell align="right">{row.protein}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+    
       </Grid>
     </>
   );
