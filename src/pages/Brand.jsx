@@ -13,11 +13,9 @@ const Brand = () => {
     const [brand, setBrand] = useState("");
     const {id} = useParams();
     const navigate = useNavigate();
-
     const goHome = () => {
         navigate('/');
     }
-
     useEffect(() => {
         axios.get(`https://formation.inow.fr/demo/api/v1/brands/${id}`).then(response => {
             setBrand(response.data);
@@ -30,7 +28,7 @@ const Brand = () => {
             <CardContent>
                 <CardMedia
                         sx={{ height: 140 , width:150 }}
-                        image="https://formation.inow.fr/demo/api/v1/brands/+${id}/image"
+                        image={`/${brand.image}`}
                         title="green iguana"
                     />
                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
