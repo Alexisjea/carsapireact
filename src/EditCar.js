@@ -1,13 +1,43 @@
 import { TextField, Button, Grid, Paper, Typography } from "@mui/material";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams , useNavigate} from "react-router-dom";
 import { useEffect, useState } from "react";
+import Snackbar from '@mui/material/Snackbar';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 const EditCar = () => {
   const currentDate = new Date();
   const formattedDate = currentDate.toISOString().split("T")[0];
-
+  const navigate = useNavigate();
   const { id } = useParams();
+  const [open, setOpen] = useState(false);
+ 
+  
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+  const action = (
+    <>
+      <Button color="secondary" size="small" onClick={handleClose}>
+        
+      </Button>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </>
+  );
+
+
 
   const [carData, setCarData] = useState({
     id: id,
@@ -32,16 +62,24 @@ const EditCar = () => {
     const idAsNumber = parseFloat(carData.brandID);
     carData.price = priceAsNumber;
     carData.brandID = idAsNumber;
-
+    setOpen(true);
     axios
       .put(`https://formation.inow.fr/demo/api/v1/cars/${id}`, carData)
       .then((response) => {
-        console.log("Envoi réussi");
+        setOpen(true);
+         setTimeout(() => {  // Wait for some time (you can adjust this)
+          navigate("/cars");  // Navigate after showing Snackbar
+        }, 3000);
+       
+        console.log("Envoi réussi"+ open);
       })
       .catch((err) => {
         console.log("Erreur lors de la modif de voiture" + err.response);
         console.log(carData);
       });
+      
+      console.log(open);
+      
   };
 
   useEffect(() => {
@@ -62,7 +100,7 @@ const EditCar = () => {
         const error = err.response.data.error;
         console.log(error);
       });
-  }, [id]);
+  }, [id, open]);
 
   return (
     <Grid container justifyContent="center">
@@ -110,6 +148,13 @@ const EditCar = () => {
             >
               Sauvegarder
             </Button>
+            <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        message="Modification réussie"
+        action={action}
+      />
           </form>
         </Paper>
       </Grid>
