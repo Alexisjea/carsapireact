@@ -8,16 +8,15 @@ import { useState } from "react";
 import { UserContext } from "./core/components/contexts/UserContext";
 
 import i18next from './core/config/i18next';
+import i18n from './core/config/i18n';
 
 function App() {
-  const { t, i18n } = useTranslation();
-  const changeLanguage = (lng) => {
-    i18n.changeLanguage(lng);
-  };
+  
+  
   const [user, setUser] = useState(JSON.parse(sessionStorage.getItem("USER")));
   return (
     <div>
-      <I18nextProvider i18n={i18next}>
+      <I18nextProvider i18n={i18n}>
         <UserContext.Provider value={[user, setUser]}>
           <BrowserRouter>
           <div className="doo" >
