@@ -38,7 +38,6 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   justifyContent: "center",
 }));
 
-
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   "& .MuiInputBase-input": {
@@ -57,7 +56,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const NavBar = () => {
-
   const { t, i18n } = useTranslation();
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
@@ -97,9 +95,13 @@ const NavBar = () => {
             <Button color="inherit" component={Link} to="/cars">
               List Cars
             </Button>
-            <Button color="inherit"  onClick={() => changeLanguage('en')}>English</Button>
-            <Button color="inherit"  onClick={() => changeLanguage('fr')}>Français</Button>
-              <h1>{t('welcome')} {{welcome}}</h1>
+            <Button color="inherit" onClick={() => changeLanguage("en")}>
+              English
+            </Button>
+            <Button color="inherit" onClick={() => changeLanguage("fr")}>
+              Français
+            </Button>
+            <h1>{t("welcome")}</h1>
             {user ? (
               <>
                 <Button color="inherit" component={Link} to="/addCar">

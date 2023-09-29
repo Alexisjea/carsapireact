@@ -65,7 +65,6 @@ const CarEdit = () => {
         setTimeout(() => {
           navigate("/cars");
         }, 3000);
-
         console.log("Envoi réussi" + open);
       })
       .catch((err) => {
