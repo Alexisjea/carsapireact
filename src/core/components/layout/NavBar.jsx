@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { useTranslation } from "react-i18next";
+import i18n from "../../config/i18n";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -58,10 +59,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const NavBar = () => {
 
-  const { t, i18n } = useTranslation();
-  const changeLanguage = (lng) => {
-    i18n.changeLanguage(lng);
-  };
+  const { t } = useTranslation();
+  
   const [user, setUser] = useContext(UserContext);
 
   const handleLogout = () => {
@@ -97,16 +96,16 @@ const NavBar = () => {
             <Button color="inherit" component={Link} to="/cars">
               List Cars
             </Button>
-            <Button color="inherit"  onClick={() => changeLanguage('en')}>English</Button>
-            <Button color="inherit"  onClick={() => changeLanguage('fr')}>Français</Button>
-              <h1>{t('welcome')} {{welcome}}</h1>
+            <Button color="inherit"  onClick={() => i18n.changeLanguage('en')}>English</Button>
+            <Button color="inherit"  onClick={() => i18n.changeLanguage('fr')}>Français</Button>
+              
             {user ? (
               <>
                 <Button color="inherit" component={Link} to="/addCar">
                   Ajouter une voiture
                 </Button>
                 <Button color="inherit" onClick={handleLogout}>
-                  Logout
+                  {t('logout')}
                 </Button>
               </>
             ) : (
