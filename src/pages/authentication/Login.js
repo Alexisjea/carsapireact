@@ -6,8 +6,10 @@ import Container from "@mui/material/Container";
 import { useNavigate } from "react-router-dom";
 import InputMail from "../../core/components/forms/InputMail";
 import { UserContext } from "../../core/components/contexts/UserContext";
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -34,18 +36,18 @@ const Login = () => {
 
   return (
     <div>
-      <h1>Connexion</h1>
+      <h1> {t('login')}</h1>
       <Container maxWidth="sm">
         <form onSubmit={handleSubmit}>
           <InputMail
-            label="Login"
+            label={t('login')}
             placeholder="Votre Login"
             onChange={(e) => handleInputChange(e, "email")}
           />
 
           <TextField
             fullWidth
-            label="Password"
+            label= {t('password')}
             name="password"
             value={formData.password}
             onChange={(e) => handleInputChange(e, "password")}
@@ -55,7 +57,7 @@ const Login = () => {
           />
 
           <Button type="submit" variant="contained" color="primary">
-            Se connecter
+            {t('login')}
           </Button>
         </form>
       </Container>

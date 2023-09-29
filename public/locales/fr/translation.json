@@ -1,9 +1,11 @@
 {
     "welcome" : "Bienvenue",
+    "home" : "Accueil",
     "login" : "Connexion", 
     "adressEmail" : "Adresse E-mail",
     "password" : "Mot de passe",
     "carlist" : "Liste des voitures",
     "logout" : "Deconnexion",
-    "addCar" : "Ajouter une voiture" 
+    "addCar" : "Ajouter une voiture" ,
+    "listcars" : "Liste des voitures"
 }
