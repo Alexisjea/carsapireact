@@ -39,7 +39,6 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   justifyContent: "center",
 }));
 
-
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   "& .MuiInputBase-input": {
@@ -59,8 +58,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const NavBar = () => {
 
+
   const { t } = useTranslation();
   
+
+  const { t, i18n } = useTranslation();
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+  };
+
   const [user, setUser] = useContext(UserContext);
 
   const handleLogout = () => {
@@ -73,32 +79,25 @@ const NavBar = () => {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              sx={{ mr: 2 }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
-            >
-              MUI
-            </Typography>
             <Button color="inherit" component={Link} to="/">
               Home
             </Button>
             <Button color="inherit" component={Link} to="/cars">
               List Cars
             </Button>
+
             <Button color="inherit"  onClick={() => i18n.changeLanguage('en')}>English</Button>
             <Button color="inherit"  onClick={() => i18n.changeLanguage('fr')}>Français</Button>
               
+
+            <Button color="inherit" onClick={() => changeLanguage("en")}>
+              English
+            </Button>
+            <Button color="inherit" onClick={() => changeLanguage("fr")}>
+              Français
+            </Button>
+            <h1>{t("welcome")}</h1>
+
             {user ? (
               <>
                 <Button color="inherit" component={Link} to="/addCar">
