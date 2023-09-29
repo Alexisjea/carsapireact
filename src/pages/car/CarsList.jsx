@@ -1,23 +1,24 @@
 import { Delete, Edit, Visibility } from "@mui/icons-material";
+import CloseIcon from "@mui/icons-material/Close";
 import { Grid } from "@mui/material";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
+import IconButton from "@mui/material/IconButton";
+import Snackbar from "@mui/material/Snackbar";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
-import Snackbar from "@mui/material/Snackbar";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../core/components/contexts/UserContext";
 
 const CarsList = () => {
   const [cars, setCars] = useState([]);
   const [brands, setBrands] = useState([]);
-
-  const navigate = useNavigate();
+  const [user] = useContext(UserContext);
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   const viewCar = (id) => {
     navigate(`/car/${id}`);
@@ -126,14 +127,28 @@ const CarsList = () => {
                 >
                   Show more
                 </Button>
-                <Button
-                  variant="contained"
-                  color="error"
-                  startIcon={<Delete />}
-                  onClick={() => deleteCar(car.id)}
-                >
-                  Delete
-                </Button>
+
+                {user && (
+                  <>
+                    <Button
+                      variant="contained"
+                      color="error"
+                      startIcon={<Delete />}
+                      onClick={() => deleteCar(car.id)}
+                    >
+                      Delete
+                    </Button>
+
+                    <Button
+                      variant="contained"
+                      color="warning"
+                      startIcon={<Edit />}
+                      onClick={() => editCar(car.id)}
+                    >
+                      Edit
+                    </Button>
+                  </>
+                )}
 
                 <Snackbar
                   open={open}
@@ -142,15 +157,6 @@ const CarsList = () => {
                   message="Supression réussie"
                   action={action}
                 />
-
-                <Button
-                  variant="contained"
-                  color="warning"
-                  startIcon={<Edit />}
-                  onClick={() => editCar(car.id)}
-                >
-                  Edit
-                </Button>
               </CardActions>
             </Card>
           </Grid>
