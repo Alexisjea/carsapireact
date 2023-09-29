@@ -9,7 +9,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-
 const CarsList = () => {
   const [cars, setCars] = useState([]);
   const [name, setName] = useState("");
@@ -71,7 +70,9 @@ const CarsList = () => {
                 color="primary"
                 startIcon={<Visibility />}
                 onClick={() => viewCar(car.id)}
-              ></Button>
+              >
+                Details
+              </Button>
               <Button
                 variant="contained"
                 color="error"
