@@ -101,7 +101,7 @@ const CarsList = () => {
                 startIcon={<Visibility />}
                 onClick={() => viewCar(car.id)}
               >
-                Details
+                Show more
               </Button>
               <Button
                 variant="contained"
@@ -109,7 +109,7 @@ const CarsList = () => {
                 startIcon={<Delete />}
                 onClick={() => deleteCar(car.id)}
               >
-                Supprimer
+                Delete
               </Button>
 
               <Snackbar
@@ -126,7 +126,7 @@ const CarsList = () => {
                 startIcon={<Edit />}
                 onClick={() => CarEdit(car.id)}
               >
-                Modifier
+                Edit
               </Button>
             </CardActions>
           </Card>

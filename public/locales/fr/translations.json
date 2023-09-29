@@ -1,0 +1,9 @@
+{
+    "welcome" : "Bienvenue",
+    "login" : "Connexion", 
+    "adressEmail" : "Adresse E-mail",
+    "password" : "Mot de passe",
+    "carlist" : "Liste des voitures",
+    "logout" : "Deconnexion",
+    "addCar" : "Ajouter une voiture" 
+}
