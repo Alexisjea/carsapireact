@@ -14,11 +14,9 @@ import Snackbar from "@mui/material/Snackbar";
 
 const CarsList = () => {
   const [cars, setCars] = useState([]);
-  const [name, setName] = useState("");
+
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-
-  const { id } = useParams();
 
   const viewCar = (id) => {
     navigate(`/car/${id}`);
