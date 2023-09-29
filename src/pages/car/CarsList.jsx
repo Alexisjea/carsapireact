@@ -8,9 +8,9 @@ import Typography from "@mui/material/Typography";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
-import Snackbar from '@mui/material/Snackbar';
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+import Snackbar from "@mui/material/Snackbar";
 
 const CarsList = () => {
   const [cars, setCars] = useState([]);
@@ -26,7 +26,7 @@ const CarsList = () => {
   };
 
   const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
 
@@ -35,9 +35,7 @@ const CarsList = () => {
 
   const action = (
     <>
-      <Button color="secondary" size="small" onClick={handleClose}>
-        
-      </Button>
+      <Button color="secondary" size="small" onClick={handleClose}></Button>
       <IconButton
         size="small"
         aria-label="close"
@@ -49,14 +47,13 @@ const CarsList = () => {
     </>
   );
 
-
   const deleteCar = (id) => {
     axios
       .delete(`https://formation.inow.fr/demo/api/v1/cars/${id}`)
       .then((response) => {
         setOpen(true);
-         setTimeout(() => {  
-          navigate("/cars");  
+        setTimeout(() => {
+          navigate("/cars");
         }, 3000);
         console.log("Voiture supprimée avec succès.");
       })
@@ -66,8 +63,8 @@ const CarsList = () => {
       });
   };
 
-  const editCar = (id) => {
-    navigate(`/editCar/${id}`);
+  const CarEdit = (id) => {
+    navigate(`/CarEdit/${id}`);
   };
 
   useEffect(() => {
@@ -81,7 +78,7 @@ const CarsList = () => {
       <h1>La liste des voitures</h1>
       <Grid direction="row" justifyContent="center" alignItems="center">
         {cars?.map((car, index) => (
-          <Card sx={{height: "80%"}}>
+          <Card sx={{ height: "80%" }}>
             <CardContent>
               <Typography
                 sx={{ fontSize: 14 }}
@@ -115,19 +112,19 @@ const CarsList = () => {
                 Delete
               </Button>
 
-                <Snackbar
-                  open={open}
-                  autoHideDuration={6000}
-                  onClose={handleClose}
-                  message="Supression réussie"
-                  action={action}
-                />
+              <Snackbar
+                open={open}
+                autoHideDuration={6000}
+                onClose={handleClose}
+                message="Supression réussie"
+                action={action}
+              />
 
               <Button
                 variant="contained"
                 color="warning" // Vous pouvez choisir une autre couleur
                 startIcon={<Edit />}
-                onClick={() => editCar(car.id)}
+                onClick={() => CarEdit(car.id)}
               >
                 Edit
               </Button>

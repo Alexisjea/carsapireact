@@ -1,21 +1,20 @@
 import { TextField, Button, Grid, Paper, Typography } from "@mui/material";
 import axios from "axios";
-import { useParams , useNavigate} from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Snackbar from '@mui/material/Snackbar';
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
+import Snackbar from "@mui/material/Snackbar";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 
-const EditCar = () => {
+const CarEdit = () => {
   const currentDate = new Date();
   const formattedDate = currentDate.toISOString().split("T")[0];
   const navigate = useNavigate();
   const { id } = useParams();
   const [open, setOpen] = useState(false);
- 
-  
+
   const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
 
@@ -23,9 +22,7 @@ const EditCar = () => {
   };
   const action = (
     <>
-      <Button color="secondary" size="small" onClick={handleClose}>
-        
-      </Button>
+      <Button color="secondary" size="small" onClick={handleClose}></Button>
       <IconButton
         size="small"
         aria-label="close"
@@ -36,8 +33,6 @@ const EditCar = () => {
       </IconButton>
     </>
   );
-
-
 
   const [carData, setCarData] = useState({
     id: id,
@@ -67,19 +62,18 @@ const EditCar = () => {
       .put(`https://formation.inow.fr/demo/api/v1/cars/${id}`, carData)
       .then((response) => {
         setOpen(true);
-         setTimeout(() => { 
-          navigate("/cars");  
+        setTimeout(() => {
+          navigate("/cars");
         }, 3000);
-       
-        console.log("Envoi réussi"+ open);
+
+        console.log("Envoi réussi" + open);
       })
       .catch((err) => {
         console.log("Erreur lors de la modif de voiture" + err.response);
         console.log(carData);
       });
-      
-      console.log(open);
-      
+
+    console.log(open);
   };
 
   useEffect(() => {
@@ -91,9 +85,8 @@ const EditCar = () => {
           price: response.data.price,
           brandID: response.data.brandID,
           id: response.data.id,
-          dateOfCirculation: response.data.dateOfCirculation
+          dateOfCirculation: response.data.dateOfCirculation,
         });
-        
       })
 
       .catch((err) => {
@@ -149,12 +142,12 @@ const EditCar = () => {
               Sauvegarder
             </Button>
             <Snackbar
-        open={open}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        message="Modification(s) réussie"
-        action={action}
-      />
+              open={open}
+              autoHideDuration={6000}
+              onClose={handleClose}
+              message="Modification(s) réussie"
+              action={action}
+            />
           </form>
         </Paper>
       </Grid>
@@ -162,4 +155,4 @@ const EditCar = () => {
   );
 };
 
-export default EditCar;
+export default CarEdit;

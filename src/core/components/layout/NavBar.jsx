@@ -110,7 +110,6 @@ const NavBar = () => {
                 </Button>
               </>
             ) : (
-
               <>
                 <Button color="inherit" component={Link} to="auth/login">
                   Login
