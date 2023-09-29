@@ -1,3 +1,9 @@
 {
-  "welcome": "Bienvenue"
+    "welcome" : "Welcome",
+    "login" : "Login", 
+    "adressEmail" : "E-mail address",
+    "password" : "Password",
+    "carlist" : "List cars",
+    "logout" : "Logout",
+    "addCar" : "Add car"
 }

@@ -11,6 +11,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../contexts/UserContext";
+import { useTranslation } from "react-i18next";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -37,6 +38,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   justifyContent: "center",
 }));
 
+
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   "& .MuiInputBase-input": {
@@ -55,6 +57,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const NavBar = () => {
+
+  const { t, i18n } = useTranslation();
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+  };
   const [user, setUser] = useContext(UserContext);
 
   const handleLogout = () => {
@@ -85,11 +92,14 @@ const NavBar = () => {
               MUI
             </Typography>
             <Button color="inherit" component={Link} to="/">
-              Accueil
+              Home
             </Button>
             <Button color="inherit" component={Link} to="/cars">
-              Liste Voitures
+              List Cars
             </Button>
+            <Button color="inherit"  onClick={() => changeLanguage('en')}>English</Button>
+            <Button color="inherit"  onClick={() => changeLanguage('fr')}>Français</Button>
+              <h1>{t('welcome')} {{welcome}}</h1>
             {user ? (
               <>
                 <Button color="inherit" component={Link} to="/addCar">
