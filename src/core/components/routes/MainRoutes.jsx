@@ -1,15 +1,17 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import CarsList from "../../../pages/CarsList";
 import Home from "../../../pages/home/Home";
-import Car from "../../../pages/Car";
-import BrandsList from "../../../pages/BrandsList";
+
 import Login from "../../../pages/authentication/Login";
-import Brand from "../../../pages/Brand";
-import AddCar from "../../../AddCar";
-import EditCar from "../../../EditCar";
+
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../contexts/UserContext";
 import { useContext } from "react";
+import CarAdd from "../../../pages/car/CarAdd";
+import CarEdit from "../../../pages/car/CarEdit";
+import Car from "../../../pages/car/Car";
+import CarsList from "../../../pages/car/CarsList";
+import BrandsList from "../../../pages/brand/BrandsList";
+import Brand from "../../../pages/brand/Brand";
 
 const MainRoutes = () => {
   const [user, setUser] = useContext(UserContext);
@@ -27,12 +29,12 @@ const MainRoutes = () => {
 
         <Route
           path="/addCar"
-          element={user ? <AddCar /> : <Navigate to="/auth/login" replace />}
+          element={user ? <CarAdd /> : <Navigate to="/auth/login" replace />}
         />
 
         <Route
           path="/editCar/:id"
-          element={user ? <EditCar /> : <Navigate to="/auth/login" replace />}
+          element={user ? <CarEdit /> : <Navigate to="/auth/login" replace />}
         />
       </Routes>
     </>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { TextField, Button, Grid, Paper, Typography } from "@mui/material";
 import axios from "axios";
 
-const AddCar = () => {
+const CarAdd = () => {
   const currentDate = new Date();
   const formattedDate = currentDate.toISOString().split("T")[0];
 
@@ -94,4 +94,4 @@ const AddCar = () => {
   );
 };
 
-export default AddCar;
+export default CarAdd;
