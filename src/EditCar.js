@@ -67,8 +67,8 @@ const EditCar = () => {
       .put(`https://formation.inow.fr/demo/api/v1/cars/${id}`, carData)
       .then((response) => {
         setOpen(true);
-         setTimeout(() => {  // Wait for some time (you can adjust this)
-          navigate("/cars");  // Navigate after showing Snackbar
+         setTimeout(() => { 
+          navigate("/cars");  
         }, 3000);
        
         console.log("Envoi réussi"+ open);
@@ -152,7 +152,7 @@ const EditCar = () => {
         open={open}
         autoHideDuration={6000}
         onClose={handleClose}
-        message="Modification réussie"
+        message="Modification(s) réussie"
         action={action}
       />
           </form>

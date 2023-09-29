@@ -8,12 +8,16 @@ import Typography from "@mui/material/Typography";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import Snackbar from '@mui/material/Snackbar';
 
 
 const CarsList = () => {
   const [cars, setCars] = useState([]);
   const [name, setName] = useState("");
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
 
   const { id } = useParams();
 
@@ -22,10 +26,39 @@ const CarsList = () => {
     console.log(id);
   };
 
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const action = (
+    <>
+      <Button color="secondary" size="small" onClick={handleClose}>
+        
+      </Button>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </>
+  );
+
+
   const deleteCar = (id) => {
     axios
       .delete(`https://formation.inow.fr/demo/api/v1/cars/${id}`)
       .then((response) => {
+        setOpen(true);
+         setTimeout(() => {  
+          navigate("/cars");  
+        }, 3000);
         console.log("Voiture supprimée avec succès.");
       })
       .catch((error) => {
@@ -66,7 +99,37 @@ const CarsList = () => {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button onClick={() => viewCar(car.id)}> Voir plus</Button>
+              <Button
+                variant="contained"
+                color="primary"
+                startIcon={<Visibility />}
+                onClick={() => viewCar(car.id)}
+              >
+                Details
+              </Button>
+              <Button
+                variant="contained"
+                color="error"
+                startIcon={<Delete />}
+                onClick={() => deleteCar(car.id)}
+              >
+                Supprimer
+              </Button>
+                <Snackbar
+                  open={open}
+                  autoHideDuration={6000}
+                  onClose={handleClose}
+                  message="Supression réussie"
+                  action={action}
+                />
+              <Button
+                variant="contained"
+                color="warning" // Vous pouvez choisir une autre couleur
+                startIcon={<Edit />}
+                onClick={() => editCar(car.id)}
+              >
+                Modifier
+              </Button>
             </CardActions>
           </Card>
         ))}
