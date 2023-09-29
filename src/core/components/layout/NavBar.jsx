@@ -80,7 +80,7 @@ const NavBar = () => {
         <AppBar position="static">
           <Toolbar>
             <Button color="inherit" component={Link} to="/">
-              Home
+              {t('home')}
             </Button>
             <Button color="inherit" component={Link} to="/cars">
               {t('listcars')}
@@ -99,7 +99,7 @@ const NavBar = () => {
             ) : (
               <>
                 <Button color="inherit" component={Link} to="auth/login">
-                  Login
+                  {t('login')}
                 </Button>
               </>
             )}

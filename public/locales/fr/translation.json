@@ -1,5 +1,6 @@
 {
     "welcome" : "Bienvenue",
+    "home" : "Accueil",
     "login" : "Connexion", 
     "adressEmail" : "Adresse E-mail",
     "password" : "Mot de passe",
