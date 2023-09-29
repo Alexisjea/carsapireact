@@ -1,21 +1,19 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "../../../pages/home/Home";
 
 import Login from "../../../pages/authentication/Login";
 
-import { useNavigate } from "react-router-dom";
-import { UserContext } from "../contexts/UserContext";
 import { useContext } from "react";
+import Brand from "../../../pages/brand/Brand";
+import BrandsList from "../../../pages/brand/BrandsList";
+import Car from "../../../pages/car/Car";
 import CarAdd from "../../../pages/car/CarAdd";
 import CarEdit from "../../../pages/car/CarEdit";
-import Car from "../../../pages/car/Car";
 import CarsList from "../../../pages/car/CarsList";
-import BrandsList from "../../../pages/brand/BrandsList";
-import Brand from "../../../pages/brand/Brand";
+import { UserContext } from "../contexts/UserContext";
 
 const MainRoutes = () => {
   const [user, setUser] = useContext(UserContext);
-  const navigate = useNavigate();
 
   return (
     <>
