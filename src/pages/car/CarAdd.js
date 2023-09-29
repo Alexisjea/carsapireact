@@ -1,10 +1,22 @@
 import React, { useState } from "react";
-import { TextField, Button, Grid, Paper, Typography } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Grid,
+  Paper,
+  Typography,
+  Snackbar,
+  IconButton,
+} from "@mui/material";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import CloseIcon from "@mui/icons-material/Close";
 
 const CarAdd = () => {
   const currentDate = new Date();
   const formattedDate = currentDate.toISOString().split("T")[0];
+  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   const [carData, setCarData] = useState({
     model: "",
@@ -20,6 +32,28 @@ const CarAdd = () => {
       [name]: value,
     });
   };
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const action = (
+    <>
+      <Button color="secondary" size="small" onClick={handleClose}></Button>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </>
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,7 +72,12 @@ const CarAdd = () => {
           dateOfCirculation: formattedDate,
           brandID: 5,
         });
-        console.log("Envoi réussi");
+
+        setOpen(true);
+        setTimeout(() => {
+          navigate("/cars");
+        }, 500);
+        console.log("Voiture ajoutée" + open);
       })
       .catch((err) => {
         console.log("Erreur lors de l'ajout de voiture" + err.response);
@@ -87,6 +126,13 @@ const CarAdd = () => {
             <Button variant="contained" color="primary" type="submit">
               Ajouter la voiture
             </Button>
+            <Snackbar
+              open={open}
+              autoHideDuration={6000}
+              onClose={handleClose}
+              message="Ajout Réussi !"
+              action={action}
+            />
           </form>
         </Paper>
       </Grid>

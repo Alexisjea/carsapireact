@@ -57,14 +57,13 @@ const CarEdit = () => {
     const idAsNumber = parseFloat(carData.brandID);
     carData.price = priceAsNumber;
     carData.brandID = idAsNumber;
-    setOpen(true);
     axios
       .put(`https://formation.inow.fr/demo/api/v1/cars/${id}`, carData)
       .then((response) => {
         setOpen(true);
         setTimeout(() => {
           navigate("/cars");
-        }, 3000);
+        }, 500);
         console.log("Envoi réussi" + open);
       })
       .catch((err) => {

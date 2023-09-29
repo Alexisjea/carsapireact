@@ -32,7 +32,7 @@ const CarsList = () => {
         setOpen(true);
         setTimeout(() => {
           navigate("/cars");
-        }, 3000);
+        }, 500);
         console.log("Voiture supprimée avec succès.");
       })
       .catch((error) => {
@@ -114,7 +114,7 @@ const CarsList = () => {
 
               <Snackbar
                 open={open}
-                autoHideDuration={6000}
+                autoHideDuration={1000}
                 onClose={handleClose}
                 message="Supression réussie"
                 action={action}
