@@ -25,6 +25,26 @@ const CarsList = () => {
     console.log(id);
   };
 
+  const deleteCar = (id) => {
+    axios
+      .delete(`https://formation.inow.fr/demo/api/v1/cars/${id}`)
+      .then((response) => {
+        setOpen(true);
+        setTimeout(() => {
+          navigate("/cars");
+        }, 3000);
+        console.log("Voiture supprimée avec succès.");
+      })
+      .catch((error) => {
+        console.error("Erreur lors de la suppression de la voiture :", error);
+        console.log(error.message);
+      });
+  };
+
+  const editCar = (id) => {
+    navigate(`/editCar/${id}`);
+  };
+
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -46,26 +66,6 @@ const CarsList = () => {
       </IconButton>
     </>
   );
-
-  const deleteCar = (id) => {
-    axios
-      .delete(`https://formation.inow.fr/demo/api/v1/cars/${id}`)
-      .then((response) => {
-        setOpen(true);
-        setTimeout(() => {
-          navigate("/cars");
-        }, 3000);
-        console.log("Voiture supprimée avec succès.");
-      })
-      .catch((error) => {
-        console.error("Erreur lors de la suppression de la voiture :", error);
-        console.log(error.message);
-      });
-  };
-
-  const CarEdit = (id) => {
-    navigate(`/CarEdit/${id}`);
-  };
 
   useEffect(() => {
     axios.get("https://formation.inow.fr/demo/api/v1/cars").then((response) => {
@@ -124,7 +124,7 @@ const CarsList = () => {
                 variant="contained"
                 color="warning" // Vous pouvez choisir une autre couleur
                 startIcon={<Edit />}
-                onClick={() => CarEdit(car.id)}
+                onClick={() => editCar(car.id)}
               >
                 Modifier
               </Button>
