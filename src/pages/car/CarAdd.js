@@ -17,19 +17,18 @@ import { useNavigate } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
 
 const CarAdd = () => {
+  const navigate = useNavigate();
+  const [brands, setBrands] = useState([]);
+
   const currentDate = new Date();
   const formattedDate = currentDate.toISOString().split("T")[0];
   const [open, setOpen] = useState(false);
-  const navigate = useNavigate();
-
   const [carData, setCarData] = useState({
     model: "",
     price: 0,
     dateOfCirculation: formattedDate,
     brandID: 5,
   });
-
-  const [brands, setBrands] = useState([]);
 
   useEffect(() => {
     axios
@@ -38,9 +37,6 @@ const CarAdd = () => {
         setBrands(response.data);
       });
   }, []);
-  const viewBrand = (id) => {
-    navigate(`/brand/${id}`);
-  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
