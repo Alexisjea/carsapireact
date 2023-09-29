@@ -48,7 +48,7 @@ const CarsList = () => {
       <h1>La liste des voitures</h1>
       <Grid direction="row" justifyContent="center" alignItems="center">
         {cars?.map((car, index) => (
-          <Card sx={{ minWidth: 275 }}>
+          <Card sx={{height: "80%"}}>
             <CardContent>
               <Typography
                 sx={{ fontSize: 14 }}
