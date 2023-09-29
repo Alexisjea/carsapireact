@@ -66,12 +66,6 @@ const NavBar = () => {
 
 
   const { t } = useTranslation();
-  
-
-  const { t, i18n } = useTranslation();
-  const changeLanguage = (lng) => {
-    i18n.changeLanguage(lng);
-  };
 
   const [user, setUser] = useContext(UserContext);
 

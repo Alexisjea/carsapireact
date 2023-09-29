@@ -3,8 +3,9 @@ const FrFlag = () => {
 
     return(
         <>
-         <SvgIcon >
-     
+        <SvgIcon 
+    >
+      
       <defs>
         <clipPath id="id1">
           <path d="M 19 5.261719 L 27.582031 5.261719 L 27.582031 23.40625 L 19 23.40625 Z M 19 5.261719 " clip-rule="nonzero" />
