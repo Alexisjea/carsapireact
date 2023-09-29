@@ -49,7 +49,7 @@ const CarsList = () => {
       <h1>La liste des voitures</h1>
       <Grid direction="row" justifyContent="center" alignItems="center">
         {cars?.map((car, index) => (
-          <Card sx={{ minWidth: 275 }}>
+          <Card sx={{height: "80%"}}>
             <CardContent>
               <Typography
                 sx={{ fontSize: 14 }}
@@ -66,28 +66,7 @@ const CarsList = () => {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button
-                variant="contained"
-                color="primary"
-                startIcon={<Visibility />}
-                onClick={() => viewCar(car.id)}
-              ></Button>
-              <Button
-                variant="contained"
-                color="error"
-                startIcon={<Delete />}
-                onClick={() => deleteCar(car.id)}
-              >
-                Supprimer
-              </Button>
-              <Button
-                variant="contained"
-                color="warning" // Vous pouvez choisir une autre couleur
-                startIcon={<Edit />}
-                onClick={() => editCar(car.id)}
-              >
-                Modifier
-              </Button>
+              <Button onClick={() => viewCar(car.id)}> Voir plus</Button>
             </CardActions>
           </Card>
         ))}
