@@ -1,22 +1,24 @@
 import { Delete, Edit, Visibility } from "@mui/icons-material";
+import CloseIcon from "@mui/icons-material/Close";
 import { Grid } from "@mui/material";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
+import IconButton from "@mui/material/IconButton";
+import Snackbar from "@mui/material/Snackbar";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
-import Snackbar from "@mui/material/Snackbar";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../core/components/contexts/UserContext";
 
 const CarsList = () => {
   const [cars, setCars] = useState([]);
-
-  const navigate = useNavigate();
+  const [brands, setBrands] = useState([]);
+  const [user] = useContext(UserContext);
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   const viewCar = (id) => {
     navigate(`/car/${id}`);
@@ -51,6 +53,11 @@ const CarsList = () => {
     setOpen(false);
   };
 
+  const getBrandNameById = (brandId) => {
+    const brand = brands.find((brand) => brand.id === brandId);
+    return brand ? brand.name : "Unknown Brand";
+  };
+
   const action = (
     <>
       <Button color="secondary" size="small" onClick={handleClose}></Button>
@@ -69,6 +76,12 @@ const CarsList = () => {
     axios.get("https://formation.inow.fr/demo/api/v1/cars").then((response) => {
       setCars(response.data);
     });
+
+    axios
+      .get("https://formation.inow.fr/demo/api/v1/brands")
+      .then((response) => {
+        setBrands(response.data);
+      });
   }, [deleteCar]);
 
   return (
@@ -91,11 +104,18 @@ const CarsList = () => {
                 >
                   Voiture : {car.id}
                 </Typography>
+                <Typography sx={{ fontSize: 16 }} color="text.primary">
+                  Marque : {getBrandNameById(car.brandID)}
+                </Typography>
                 <Typography variant="h5" component="div">
                   Modèle : {car.model}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                  Prix : {car.price} Marque Id : {car.brandID}
+                  Prix :{" "}
+                  {Number(car.price).toLocaleString("fr-FR", {
+                    style: "currency",
+                    currency: "EUR",
+                  })}
                 </Typography>
               </CardContent>
               <CardActions>
@@ -107,14 +127,28 @@ const CarsList = () => {
                 >
                   Show more
                 </Button>
-                <Button
-                  variant="contained"
-                  color="error"
-                  startIcon={<Delete />}
-                  onClick={() => deleteCar(car.id)}
-                >
-                  Delete
-                </Button>
+
+                {user && (
+                  <>
+                    <Button
+                      variant="contained"
+                      color="error"
+                      startIcon={<Delete />}
+                      onClick={() => deleteCar(car.id)}
+                    >
+                      Delete
+                    </Button>
+
+                    <Button
+                      variant="contained"
+                      color="warning"
+                      startIcon={<Edit />}
+                      onClick={() => editCar(car.id)}
+                    >
+                      Edit
+                    </Button>
+                  </>
+                )}
 
                 <Snackbar
                   open={open}
@@ -123,15 +157,6 @@ const CarsList = () => {
                   message="Supression réussie"
                   action={action}
                 />
-
-                <Button
-                  variant="contained"
-                  color="warning"
-                  startIcon={<Edit />}
-                  onClick={() => editCar(car.id)}
-                >
-                  Edit
-                </Button>
               </CardActions>
             </Card>
           </Grid>
