@@ -14,6 +14,12 @@ import { UserContext } from "../contexts/UserContext";
 import { useTranslation } from "react-i18next";
 import i18n from "../../config/i18n";
 
+import UsFlag from "./svg/UsFlag";
+import FrFlag from "./svg/FrFlag";
+
+
+
+
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -94,15 +100,14 @@ const NavBar = () => {
               Home
             </Button>
             <Button color="inherit" component={Link} to="/cars">
-              List Cars
+              {t('listcars')}
             </Button>
-            <Button color="inherit"  onClick={() => i18n.changeLanguage('en')}>English</Button>
-            <Button color="inherit"  onClick={() => i18n.changeLanguage('fr')}>Français</Button>
+            
               
             {user ? (
               <>
                 <Button color="inherit" component={Link} to="/addCar">
-                  Ajouter une voiture
+                  {t('addCar')}
                 </Button>
                 <Button color="inherit" onClick={handleLogout}>
                   {t('logout')}
@@ -115,6 +120,10 @@ const NavBar = () => {
                 </Button>
               </>
             )}
+            <Button color="inherit"  onClick={() => i18n.changeLanguage('en')}>
+             <UsFlag/></Button>
+            <Button color="inherit"  onClick={() => i18n.changeLanguage('fr')}>
+             <FrFlag/>  </Button>
           </Toolbar>
         </AppBar>
       </Box>

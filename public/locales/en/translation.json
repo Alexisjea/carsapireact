@@ -5,5 +5,6 @@
     "password" : "Password",
     "carlist" : "List cars",
     "logout" : "Logout",
-    "addCar" : "Add car"
+    "addCar" : "Add car",
+    "listcars" : "List cars"
 }
