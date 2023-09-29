@@ -57,12 +57,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const NavBar = () => {
-
-
   const { t } = useTranslation();
-  
 
-  const { t, i18n } = useTranslation();
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
   };
@@ -86,9 +82,12 @@ const NavBar = () => {
               List Cars
             </Button>
 
-            <Button color="inherit"  onClick={() => i18n.changeLanguage('en')}>English</Button>
-            <Button color="inherit"  onClick={() => i18n.changeLanguage('fr')}>Français</Button>
-              
+            <Button color="inherit" onClick={() => i18n.changeLanguage("en")}>
+              English
+            </Button>
+            <Button color="inherit" onClick={() => i18n.changeLanguage("fr")}>
+              Français
+            </Button>
 
             <Button color="inherit" onClick={() => changeLanguage("en")}>
               English
@@ -104,7 +103,7 @@ const NavBar = () => {
                   Ajouter une voiture
                 </Button>
                 <Button color="inherit" onClick={handleLogout}>
-                  {t('logout')}
+                  {t("logout")}
                 </Button>
               </>
             ) : (
