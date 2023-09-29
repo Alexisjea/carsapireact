@@ -12,7 +12,6 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Snackbar from '@mui/material/Snackbar';
 
-
 const CarsList = () => {
   const [cars, setCars] = useState([]);
   const [name, setName] = useState("");
@@ -115,6 +114,7 @@ const CarsList = () => {
               >
                 Delete
               </Button>
+
                 <Snackbar
                   open={open}
                   autoHideDuration={6000}
@@ -122,6 +122,7 @@ const CarsList = () => {
                   message="Supression réussie"
                   action={action}
                 />
+
               <Button
                 variant="contained"
                 color="warning" // Vous pouvez choisir une autre couleur
