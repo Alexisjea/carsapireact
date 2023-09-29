@@ -18,9 +18,8 @@ import FrFlag from "./svg/FrFlag";
 
 
 const NavBar = () => {
-
-
   const { t } = useTranslation();
+
 
   const [user, setUser] = useContext(UserContext);
 
@@ -40,15 +39,24 @@ const NavBar = () => {
             <Button color="inherit" component={Link} to="/cars">
               {t('listcars')}
             </Button>
-            
-              
+
+
+            <Button color="inherit" onClick={() => i18n.changeLanguage("en")}>
+              English
+            </Button>
+            <Button color="inherit" onClick={() => i18n.changeLanguage("fr")}>
+              Français
+            </Button>
+
+
+
             {user ? (
               <>
                 <Button color="inherit" component={Link} to="/addCar">
                   {t('addCar')}
                 </Button>
                 <Button color="inherit" onClick={handleLogout}>
-                  {t('logout')}
+                  {t("logout")}
                 </Button>
               </>
             ) : (

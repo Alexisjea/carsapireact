@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   TextField,
   Button,
@@ -7,6 +7,10 @@ import {
   Typography,
   Snackbar,
   IconButton,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
 } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -24,6 +28,19 @@ const CarAdd = () => {
     dateOfCirculation: formattedDate,
     brandID: 5,
   });
+
+  const [brands, setBrands] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://formation.inow.fr/demo/api/v1/brands")
+      .then((response) => {
+        setBrands(response.data);
+      });
+  }, []);
+  const viewBrand = (id) => {
+    navigate(`/brand/${id}`);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -113,16 +130,23 @@ const CarAdd = () => {
               onChange={handleChange}
             />
 
-            <TextField
-              type="number"
-              label="Id de la marque"
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              name="brandID"
-              value={carData.brandID}
-              onChange={handleChange}
-            />
+            <FormControl variant="outlined" fullWidth margin="normal">
+              <InputLabel id="brand-label">Marque</InputLabel>
+              <Select
+                labelId="brand-label"
+                id="brandID"
+                value={carData.brandID}
+                onChange={handleChange}
+                label="Marque"
+                name="brandID"
+              >
+                {brands.map((brand) => (
+                  <MenuItem key={brand.id} value={brand.id}>
+                    {brand.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
             <Button variant="contained" color="primary" type="submit">
               Ajouter la voiture
             </Button>

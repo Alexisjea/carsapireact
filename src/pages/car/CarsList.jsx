@@ -14,11 +14,9 @@ import Snackbar from "@mui/material/Snackbar";
 
 const CarsList = () => {
   const [cars, setCars] = useState([]);
-  const [name, setName] = useState("");
+
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
-
-  const { id } = useParams();
 
   const viewCar = (id) => {
     navigate(`/car/${id}`);
@@ -75,61 +73,68 @@ const CarsList = () => {
 
   return (
     <>
-      <h1>La liste des voitures</h1>
-      <Grid direction="row" justifyContent="center" alignItems="center">
+      <Grid
+        container
+        spacing={3}
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+      >
         {cars?.map((car, index) => (
-          <Card sx={{ height: "80%" }}>
-            <CardContent>
-              <Typography
-                sx={{ fontSize: 14 }}
-                color="text.secondary"
-                gutterBottom
-              >
-                Voiture : {car.id}
-              </Typography>
-              <Typography variant="h5" component="div" key={index}>
-                Modèle : {car.model}
-              </Typography>
-              <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                Prix : {car.price} Marque Id : {car.brandID}
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button
-                variant="contained"
-                color="primary"
-                startIcon={<Visibility />}
-                onClick={() => viewCar(car.id)}
-              >
-                Show more
-              </Button>
-              <Button
-                variant="contained"
-                color="error"
-                startIcon={<Delete />}
-                onClick={() => deleteCar(car.id)}
-              >
-                Delete
-              </Button>
+          <Grid item xs={12} sm={6} md={4} key={index}>
+            <Card sx={{ height: "80%" }}>
+              <CardContent>
+                <Typography
+                  sx={{ fontSize: 14 }}
+                  color="text.secondary"
+                  gutterBottom
+                >
+                  Voiture : {car.id}
+                </Typography>
+                <Typography variant="h5" component="div">
+                  Modèle : {car.model}
+                </Typography>
+                <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                  Prix : {car.price} Marque Id : {car.brandID}
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  startIcon={<Visibility />}
+                  onClick={() => viewCar(car.id)}
+                >
+                  Show more
+                </Button>
+                <Button
+                  variant="contained"
+                  color="error"
+                  startIcon={<Delete />}
+                  onClick={() => deleteCar(car.id)}
+                >
+                  Delete
+                </Button>
 
-              <Snackbar
-                open={open}
-                autoHideDuration={1000}
-                onClose={handleClose}
-                message="Supression réussie"
-                action={action}
-              />
+                <Snackbar
+                  open={open}
+                  autoHideDuration={1000}
+                  onClose={handleClose}
+                  message="Supression réussie"
+                  action={action}
+                />
 
-              <Button
-                variant="contained"
-                color="warning" // Vous pouvez choisir une autre couleur
-                startIcon={<Edit />}
-                onClick={() => editCar(car.id)}
-              >
-                Edit
-              </Button>
-            </CardActions>
-          </Card>
+                <Button
+                  variant="contained"
+                  color="warning"
+                  startIcon={<Edit />}
+                  onClick={() => editCar(car.id)}
+                >
+                  Edit
+                </Button>
+              </CardActions>
+            </Card>
+          </Grid>
         ))}
       </Grid>
     </>

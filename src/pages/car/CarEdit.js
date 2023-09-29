@@ -1,4 +1,14 @@
-import { TextField, Button, Grid, Paper, Typography } from "@mui/material";
+import {
+  TextField,
+  Button,
+  Grid,
+  Paper,
+  Typography,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from "@mui/material";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -12,6 +22,18 @@ const CarEdit = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [open, setOpen] = useState(false);
+  const [brands, setBrands] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("https://formation.inow.fr/demo/api/v1/brands")
+      .then((response) => {
+        setBrands(response.data);
+      });
+  }, []);
+  const viewBrand = (id) => {
+    navigate(`/brand/${id}`);
+  };
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -121,16 +143,23 @@ const CarEdit = () => {
               onChange={handleChange}
             />
 
-            <TextField
-              type="number"
-              label="Id de la marque"
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              name="brandID"
-              value={carData.brandID}
-              onChange={handleChange}
-            />
+            <FormControl variant="outlined" fullWidth margin="normal">
+              <InputLabel id="brand-label">Marque</InputLabel>
+              <Select
+                labelId="brand-label"
+                id="brandID"
+                value={carData.brandID}
+                onChange={handleChange}
+                label="Marque"
+                name="brandID"
+              >
+                {brands.map((brand) => (
+                  <MenuItem key={brand.id} value={brand.id}>
+                    {brand.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
             <Button
               variant="contained"
               color="primary"
